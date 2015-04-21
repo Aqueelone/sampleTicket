@@ -1,0 +1,24 @@
+    <%
+      @name_mailed = @user.name.scan(/(?:[-a-z_\d])+@(?:[-a-z])*(?:\.[a-z]{2,4})+/)
+      if (@name_mailed.length == 0)
+    %>
+    Welcome to sampleTicket, <%= @user.name %>
+    
+      You create ticket successfully!
+    
+      To view this ticket, just follow this link: <%= @url %>.
+    
+    Thanks for joining and have a great day!
+    <% else %> 
+      Welcome to sampleTicket!
+    
+      When You created ticket and defined Your E-Mail as <%= @name_mailed %>,
+      You had temporary signed up to sampleTicket,
+      your temporary username is: <%= @user.name %>.
+      with password: <% @user.password %>
+   
+    
+      To view status of Your ticket, just follow this link: <%= @url %>.
+    
+    Thanks for joining and have a great day!
+    <% end %>

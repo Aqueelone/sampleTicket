@@ -1,0 +1,111 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8 квіт 2015, 16:18:46
+    Author     : root
+*/
+
+.inner-wrap {
+    background: url(back.jpg) 160px 0px repeat;
+    height: 100%;
+}
+
+.container {
+    margin: auto 10px;
+    text-shadow: white 1px 0px 1px;
+}
+.top-bar{    
+    box-shadow: black 0px 0px 5px;
+}
+
+.title-area {
+    font-size: 2em;
+}
+
+form label{
+    color: #333;   
+    font-size: 1.2em;
+}
+
+div.field select, div.field input, div.field textarea{
+    border-top-left-radius: 9px;
+    background-color: #ddf;
+    border: #ddf solid 2px;
+    box-shadow: #09f 1px 2px 2px;    
+    height: 40px;
+}
+.alert{
+    color: red;
+}
+.alert ul li{        
+    list-style-type: decimal;
+}
+.form-actions{
+    padding: 10px 0px;
+}
+a.button, input.button{
+    border-radius: 9px !important;
+    border: #09f solid 2px;
+    color: #333;
+    text-shadow: white 1px 0px 1px;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.2em;    
+    margin: 5px;
+}
+table a.button, tabble input.button{
+    font-size: 1em;
+    padding: 10px;
+    margin: auto;
+}
+table {
+    border: #09f solid 1px;
+    box-shadow: 1px 1px 3px #333;
+}
+table thead tr{
+    background-color: #007095;
+    border: #09f solid 1px;
+    border-bottom-width: 2px;  
+    border-left-width: 2px;   
+    border-right-width: 3px;
+    box-shadow: 1px 1px 3px #333;
+}
+table thead tr > th{
+    color: white;
+    text-shadow: #333 1px 0px 2px;
+    text-transform: lowercase;
+    font-size: 1em;;
+}
+table tbody tr{
+    border: #09f solid 1px;
+    border-left-width: 2px;  
+    border-right-width: 3px;
+}
+.content{
+    min-height: 600px;
+}
+.zurb-footer-bottom {
+    background: #333;
+    padding: 10px 20px;
+    box-shadow: black 0px -1px 5px;
+    text-shadow: white 1px 0px 1px;
+}
+.zurb-footer-bottom > .button-bar p{
+    margin: auto;
+}
+
+.zurb-footer-bottom ul.zurb-links {
+    margin: -10px 10px;
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.zurb-footer-bottom ul.zurb-links li{
+    margin: 0px -10px;
+    padding: 10px;
+    display: block;
+    list-style-type: none;
+}

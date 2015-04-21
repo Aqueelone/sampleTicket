@@ -1,0 +1,26 @@
+<%= form_for(@ticket_status) do |f| %>
+ <% if @ticket_status.errors.any? %>
+    <div class="alert alert-error">
+        <b><%= pluralize(@ticket_status.errors.count, "error") %> prohibited this ticket_status from being saved:</b>
+
+        <ul>
+            <% @ticket_status.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field  :name, :class => "span5" %>
+  </div>
+  <div class="field">
+      <%= f.label :position %>
+      <%= f.text_field  :position, :class => "span5" %>
+  </div>
+  <div class="form-actions">
+      <%= f.submit :class => "button btn btn-success" %><br />
+      <%= link_to 'Cancel', ticket_statuses_path %>
+  </div>
+<% end %>

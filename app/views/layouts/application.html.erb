@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>sampleTicket =ONBOARDING ON=</title>
+    <%= csrf_meta_tags %>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  </head>
+  
+<div class="inner-wrap">
+    <body>
+    <div class="top-bar docs-bar hide-for-small">
+      <div class="top-bar">
+          <div class="container">
+          <%= link_to "sampleTicket", root_url, :class => "title-area left" %>
+          <div class="container nav-collapse top-bar-section">
+            <ul class="right">
+                <li><%= link_to 'Tickets', tickets_path %></li>
+                 <% if user_signed_in? %>   
+                    <li><%= link_to 'Categories', categories_path %></li>
+                    <li><%= link_to 'TicketStatuses', ticket_statuses_path %></li>
+                    <li><%= link_to 'Users', users_path %></li>
+                    <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+                  <% else %>
+                    <li><%= link_to "Log In", new_user_session_path %></li>
+                  <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>      
+    <div class="container">
+        <div class="content">
+          <div class="row">
+            <div class="span9">
+            <%= yield %>
+            </div>
+            <div class="span3">
+
+           </div>
+          </div>
+        </div>
+
+
+
+    </div> <!-- /container -->
+      <footer>
+          <div class="zurb-footer-bottom">
+          <p class="left">&copy; Sergy Nazarevich</p>
+        
+            <div class="right button-bar">
+                <h3>Information</h3>
+                <p>
+                  sampleTicket =ONBOARDING ON=
+                </p>
+            </div>    
+                 <ul class="zurb-links">
+                   <li><%= bootstrap_icon_link_to "aqueelone@gmail.com", "mailto:aqueelone@gmail.com", "icon-envelope" %></li>
+                   <li><i class="icon-info-sign"></i> +382 067 163 8809</li>
+                  </ul>            
+          </div>
+      </footer>
+</div>
+
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>

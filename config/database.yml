@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  database: postgres
+  username: su
+  password: su
+  host: localhost
+  
+test: &TEST
+  adapter: postgresql
+  database: postgres
+  username: su
+  password: su
+  host: localhost
+
+production:
+  adapter: postgresql
+  database: postgres
+  username: su
+  password: su
+  host: localhost
+  
+cucumber:
+  <<: *TEST
