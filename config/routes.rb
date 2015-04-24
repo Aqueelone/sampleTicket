@@ -1,15 +1,21 @@
 SampleTicket::Application.routes.draw do
   devise_for :users
-
-  resources :categories
-
   resources :users
+  
+  resources :categories  
 
   resources :tickets
   
   resources :ticket_statuses
   
+  resources :comment
+  
   root :to => 'tickets#index'
+  
+  devise_scope :users do
+      get "sign_out", :to => "devise/sessions#destroy"
+      delete "sign_out", :to => "devise/sessions#destroy"
+    end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

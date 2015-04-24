@@ -32,19 +32,10 @@ class AdminMailer < ActionMailer::Base
     @url = '/ticket/' << @id.to_s 
     email_with_name = %("#{@user.name}" <#{@user.email}>)
     mail_deliv = mail(to: email_with_name, subject: 'Ticket updated') do |format|
-      format.html { render layout: 'admin_mailer/ticket_update_email.html.erb' }
-      format.text { render layout: 'admin_mailer/ticket_update_email.text.erb' }
+      format.html { render layout: 'admin_mailer/ticket_update_email.html' }
+      format.text { render layout: 'admin_mailer/ticket_update_email.text' }
     end  
     mail_deliv.deliver
   end
-   
-  def ticket_delete_email(ticket)
-    @user = ticket.user 
-    email_with_name = %("#{@user.name}" <#{@user.email}>)
-    mail_deliv = mail(to: email_with_name, subject: 'Ticket deleted') do |format|
-      format.html { render layout: 'admin_mailer/ticket_delete_email.html' }
-      format.text
-    end  
-    mail_deliv.deliver   
-  end 
+
 end

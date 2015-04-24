@@ -1,8 +1,7 @@
 class TicketsController < ApplicationController
   before_filter :authenticate_user!, :only => :delete
   
-  # GET /tickets
-  # GET /tickets.json
+  # GET /tickets GET /tickets.json
   def index
     @tickets = Ticket.includes(:category, :user, :ticket_status)
 
@@ -12,8 +11,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/1
-  # GET /tickets/1.json
+  # GET /tickets/1 GET /tickets/1.json
   def show
     @ticket = Ticket.find(params[:id])
 
@@ -23,8 +21,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/new
-  # GET /tickets/new.json
+  # GET /tickets/new GET /tickets/new.json
   def new
     @ticket = Ticket.new
     @ticket.ticket_status = TicketStatus.find_by_name("Open")
@@ -40,8 +37,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
   end
 
-  # POST /tickets
-  # POST /tickets.json
+  # POST /tickets POST /tickets.json
   def create
     @ticket = Ticket.new(params[:ticket])
     respond_to do |format|
@@ -58,8 +54,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  # PUT /tickets/1
-  # PUT /tickets/1.json
+  # PUT /tickets/1 PUT /tickets/1.json
   def update
     @ticket = Ticket.find(params[:id])
 
@@ -77,16 +72,11 @@ class TicketsController < ApplicationController
     end
   end
 
-  # DELETE /tickets/1
-  # DELETE /tickets/1.json
+  # DELETE /tickets/1 DELETE /tickets/1.json
   def destroy
-    @ticket = Ticket.find(params[:id])
+    @ticket = Ticket.find(params[:id])    
     @ticket.destroy
     
-        # Tell the AdminMailer to send a delete ticket email after save
-        AdminMailer.ticket_delete_email(@ticket)
-    
-
     respond_to do |format|
       format.html { redirect_to tickets_url }
       format.json { head :ok }

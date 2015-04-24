@@ -9,7 +9,10 @@
 //= require vendor/fastclick
 //= require vendor/modernizr
 //= require vendor/placeholder
+//= require jquery
+//= require jquery_ujs
 //= require foundation.min
+//= require underscore
 //= require_tree .
 
 $(document).foundation();

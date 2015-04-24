@@ -23,6 +23,8 @@ and open the template in the editor.
 
 .title-area {
     font-size: 2em;
+    background: url(logo2.png) 8px 1px no-repeat;
+    padding-left: 35px;
 }
 
 form label{

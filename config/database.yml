@@ -1,6 +1,8 @@
 development:
   adapter: postgresql
   database: postgres
+  encoding: unicode
+  pool: 16
   username: su
   password: su
   host: localhost
@@ -8,6 +10,8 @@ development:
 test: &TEST
   adapter: postgresql
   database: postgres
+  encoding: unicode
+  pool: 16
   username: su
   password: su
   host: localhost
@@ -15,6 +19,8 @@ test: &TEST
 production:
   adapter: postgresql
   database: postgres
+  pool: 16
+  encoding: unicode
   username: su
   password: su
   host: localhost
