@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, :only => :delete
+  before_filter :store_location
+  before_filter :authenticate_user!, :only => [:new, :delete]
   
   # GET /tickets GET /tickets.json
   def index
@@ -25,7 +26,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
     @ticket.ticket_status = TicketStatus.find_by_name("Open")
-
+    current_user ? @ticket.user_id = current_user.id : @ticket.user_id == 0 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @ticket }
