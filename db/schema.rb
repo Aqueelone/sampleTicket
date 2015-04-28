@@ -11,40 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428164500) do
+ActiveRecord::Schema.define(version: 2) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", primary_key: "category_id", force: true do |t|
-    t.string   "name",       limit: nil,                   null: false
-    t.datetime "created_at",             default: "now()"
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "ticket_statuses", primary_key: "ticket_status_id", force: true do |t|
-    t.string   "name",       limit: nil,                   null: false
+  create_table "ticket_statuses", force: true do |t|
+    t.string   "name"
     t.integer  "position"
-    t.datetime "created_at",             default: "now()"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tickets", primary_key: "ticket_id", force: true do |t|
-    t.string   "title",            limit: nil
+  create_table "tickets", force: true do |t|
+    t.string   "title"
     t.text     "description"
     t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "ticket_status_id"
-    t.datetime "created_at",                   default: "now()"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", primary_key: "user_id", force: true do |t|
-    t.string   "name",                   limit: 128,                   null: false
+  create_table "users", force: true do |t|
+    t.string   "name"
     t.boolean  "is_admin",                           default: false
-    t.datetime "created_at",                         default: "now()"
+    t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 128,                   null: false
+    t.string   "email",                  limit: 128,                 null: false
     t.string   "encrypted_password",     limit: 128
     t.string   "reset_password_token",   limit: 256
     t.datetime "reset_password_sent_at"
