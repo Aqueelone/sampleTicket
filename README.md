@@ -2,7 +2,7 @@
 The simply flexible ticket system with additional features and possibilities. 
 Prepared for forking and copying as is.
 
-#intsalation
+#install::
 
 git clone $this_link $directory_for_it
 
