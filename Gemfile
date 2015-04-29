@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
+gem 'rake', '10.3.2'
+
 # inj me
 gem 'devise'
 gem 'puma'

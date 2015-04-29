@@ -155,6 +155,7 @@ DEPENDENCIES
   protected_attributes
   puma
   rails (= 4.1.8)
+  rake (= 10.3.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring

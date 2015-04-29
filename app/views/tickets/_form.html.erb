@@ -12,13 +12,13 @@
   <% end %>
   <div class="field">
       <%  if @ticket.user_id %>
-      <%  user_now = User.find(@ticket.user_id) %>
-      <%= f.label :user_id, "Feedback by " + user_now.name.to_s %>
-      <%  if user_now.is_admin %>
-      <%= f.select :user_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => false %>
-      <% else %>
-      <%= f.hidden_field :user_id, :class => "span5 hidden" %>
-      <% end %>
+        <%  user_now = User.find(@ticket.user_id) %>
+        <%= f.label :user_id, "Feedback by " + user_now.name.to_s %>
+        <%  if user_now.is_admin %>
+          <%= f.select :user_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => false %>
+        <% else %>
+          <%= f.hidden_field :user_id, :class => "span5 hidden" %>
+        <% end %>
       <% end %>
   </div>
   <div class="field">
