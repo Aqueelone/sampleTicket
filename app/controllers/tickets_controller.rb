@@ -4,9 +4,23 @@ class TicketsController < ApplicationController
   
   # GET /tickets GET /tickets.json
   def index
-    @tickets = Ticket.includes(:category, :user, :ticket_status)
-
-    respond_to do |format|
+    if current_user
+      user_id_temp = current_user.id
+    else
+      user_id_temp = 0
+    end
+    
+    if current_user && current_user.is_admin
+      @tickets = Ticket.includes(:category, :user, :ticket_status)
+    else @tickets = Ticket.includes(:category, :user, :ticket_status).where(user_id: user_id_temp)
+    end
+    
+    if(@tickets.blank?) 
+      demo_id = User.where(name: "demo").last.id 
+      @tickets = Ticket.includes(:category, :user, :ticket_status).where(user_id: demo_id)
+    end
+    
+  respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tickets }
     end

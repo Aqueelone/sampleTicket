@@ -2,10 +2,16 @@
   <h1>
     Ticket Details    
   </h1>
-<% if user_signed_in? and current_user.is_admin %>
+<% if user_signed_in? %>
+    <% if current_user.is_admin %>
       <%= bootstrap_icon_link_to 'Delete', @ticket, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-danger right" %>
-    <% end %>
       <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(@ticket), "icon-pencil icon-white", :class => "button btn btn-primary right" %>
+    <% end %>
+    <% if @ticket.user_id == current_user.id %>
+      <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(@ticket), "icon-pencil icon-white", :class => "button btn btn-primary right" %>
+    <% end %>
+<% end %>
+      <%= bootstrap_icon_link_to 'New Ticket', new_ticket_path, "icon-plus icon-white", :class => "button btn btn-success right" %>
 </div>
 
 <table class="table table-striped table-bordered table-condensed">
