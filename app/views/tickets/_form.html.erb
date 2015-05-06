@@ -14,7 +14,7 @@
       <%  if @ticket.user_id %>
         <%  user_now = User.find(@ticket.user_id) %>
         <%= f.label :user_id, "Feedback by " + user_now.name.to_s %>
-        <%  if user_now.is_admin || user_now.is_moderator %>
+        <%  if current_user.is_admin || current_user.is_moderator %>
           <%= f.select :user_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => false %>
         <% else %>
           <%= f.hidden_field :user_id, :class => "span5 hidden" %>
@@ -26,15 +26,22 @@
       <%= f.select :category_id, Category.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => true %>
   </div>
   <div class="field">
-      <%= f.label :ticket_status_id %>
-      <% @ticket_statuses =  TicketStatus.order("position ASC") %>
-      <% if !@ticket.user_id || !user_now.is_admin %>
-        <% @ticket_statuses = @ticket_statuses.where(is_closed: false) %>
-        <% if !@ticket.user_id || !user_now.is_moderator %>
-          <% @ticket_statuses = @ticket_statuses.where(is_moderable: false) %>
+      <%= f.label :ticket_status_id %>      
+      <% if @ticket.ticket_status && ((@ticket.ticket_status.is_moderable && !current_user.is_moderator)||(@ticket.ticket_status.is_closed && !current_user.is_admin)) %>
+        <span class="label label-info">
+            <%=@ticket.ticket_status.name %>
+        </span>
+        <%= f.hidden_field :ticket_status_id, :class => "span5 hidden" %>
+      <% else %>
+        <% @ticket_statuses =  TicketStatus.order("position ASC") %>
+        <% if !current_user.is_admin %>
+          <% @ticket_statuses = @ticket_statuses.where(is_closed: false) %>
+          <% if !current_user.is_moderator %>
+            <% @ticket_statuses = @ticket_statuses.where(is_moderable: false) %>
+          <% end %>
         <% end %>
+        <%= f.select :ticket_status_id, @ticket_statuses.map { |c| [c.name, c.id] }, :include_blank => true %>
       <% end %>
-      <%= f.select :ticket_status_id, @ticket_statuses.map { |c| [c.name, c.id] }, :include_blank => true %>
   </div>
   <div class="field">
       <%= f.label :title %>
