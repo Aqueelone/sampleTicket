@@ -26,8 +26,8 @@
       <%= f.select :category_id, Category.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => true %>
   </div>
   <div class="field">
-      <%= f.label :ticket_status_id %>      
-      <% if @ticket.ticket_status && ((@ticket.ticket_status.is_moderable && !current_user.is_moderator)||(@ticket.ticket_status.is_closed && !current_user.is_admin)) %>
+      <%= f.label :ticket_status_id %> 
+      <% if @ticket.ticket_status && (@ticket.ticket_status.is_closed && !current_user.is_admin) %>
         <span class="label label-info">
             <%=@ticket.ticket_status.name %>
         </span>
