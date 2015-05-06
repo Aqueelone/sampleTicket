@@ -64,10 +64,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @param = params[:user]
-    puts(@param)
-    if !@param[:password]
-      @param[:password] = @user.password
-      @param[:password_confirmation] = @user.password_confirmation
+    
+    if @param[:password].empty?
+      @param.delete(:password)
+      @param.delete(:password_confirmation)
     end
 
     respond_to do |format|
