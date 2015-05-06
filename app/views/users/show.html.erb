@@ -16,7 +16,8 @@
     <th  scope="column">Last SignIn at</th>    
     <th  scope="column">Current SignIn IP</th>
     <th  scope="column">Last SignIn IP</th>
-    <th  scope="column">Tickets</th>
+    <th  scope="column">Tickets</th>    
+    <th  scope="column">SignInCount</th>
     <th  scope="column"></th>
   </tr>
   </thead>
@@ -28,6 +29,9 @@
       <% if user.is_admin %>
         <span class="label label-info">Admin</span>
       <% end %>
+      <% if user.is_moderator %>
+        <span class="label label-info">Moderator</span>
+      <% end %>
     </td>
     <td><%= user.email %></td>
     <td><%= user.current_sign_in_at %></td>
@@ -35,6 +39,7 @@
     <td><%= user.current_sign_in_ip %></td>
     <td><%= user.last_sign_in_ip %></td>
     <td><%= user.tickets.count %></td>
+    <td><%= user.sign_in_count %></td>
     <td>
       <%= bootstrap_icon_link_to "Edit", edit_user_path(user), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
       <%= bootstrap_icon_link_to 'Delete', user, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>

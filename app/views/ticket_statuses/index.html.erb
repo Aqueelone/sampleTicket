@@ -19,7 +19,15 @@
     <tbody>
         <% @ticket_statuses.each do |ticket_status| %>
           <tr>
-              <td><%= ticket_status.name %></td>
+              <td><%= ticket_status.name %>
+                  <div class="clearfix"></div>
+                    <% if ticket_status.is_moderable %>
+                    <span class="label label-info">moderable</span>
+                    <% end %>                    
+                    <% if ticket_status.is_closed %>
+                    <span class="label label-info">closed</span>
+                    <% end %>
+              </td>
               <td><%= ticket_status.position %></td>
               <td><%= ticket_status.tickets.count %></td>
               <td>

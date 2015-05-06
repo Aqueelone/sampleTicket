@@ -63,9 +63,15 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+    @param = params[:user]
+    puts(@param)
+    if !@param[:password]
+      @param[:password] = @user.password
+      @param[:password_confirmation] = @user.password_confirmation
+    end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(@param)
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }
         format.json { head :ok }
       else
@@ -73,6 +79,7 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /users/1

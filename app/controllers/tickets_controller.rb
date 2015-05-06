@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
       user_id_temp = 0
     end
     
-    if current_user && current_user.is_admin
+    if current_user && (current_user.is_admin || current_user.is_moderator)
       @tickets = Ticket.includes(:category, :user, :ticket_status)
     else @tickets = Ticket.includes(:category, :user, :ticket_status).where(user_id: user_id_temp)
     end

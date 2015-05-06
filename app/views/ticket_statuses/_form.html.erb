@@ -1,5 +1,5 @@
 <%= form_for(@ticket_status) do |f| %>
- <% if @ticket_status.errors.any? %>
+  <% if @ticket_status.errors.any? %>
     <div class="alert alert-error">
         <b><%= pluralize(@ticket_status.errors.count, "error") %> prohibited this ticket_status from being saved:</b>
 
@@ -18,6 +18,14 @@
   <div class="field">
       <%= f.label :position %>
       <%= f.text_field  :position, :class => "span5" %>
+  </div>
+  <div class="field">
+      <%= f.label :is_moderable %>
+      <%= f.check_box :is_moderable %>
+  </div
+  <div class="field">
+      <%= f.label :is_closed %>
+      <%= f.check_box :is_closed %>
   </div>
   <div class="form-actions">
       <%= f.submit :class => "button btn btn-success" %><br />

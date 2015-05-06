@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 20150505152512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_moderable", default: false
+    t.boolean  "is_closed",    default: false
   end
 
   create_table "tickets", force: true do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 2) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 128
     t.string   "last_sign_in_ip",        limit: 128
+    t.boolean  "is_moderator",                       default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
