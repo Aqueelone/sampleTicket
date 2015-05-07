@@ -1,0 +1,8 @@
+## YAML Template.
+language: ruby
+rvm:
+  - "2.1.5"
+  - rbx
+# uncomment this line if your project needs to run something other than `rake`:
+# script: bundle exec rspec spec
+---
