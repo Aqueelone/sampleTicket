@@ -8,7 +8,7 @@ Prepared for forking and copying as is.
 
 ## Installation and Setup
 
-Radiant is a traditional Ruby on Rails application, meaning that you can
+sampleTicket is a traditional Ruby on Rails application, meaning that you can
 configure and run it the way you would a normal Rails application.
 
 See the [INSTALL](INSTALL.md) file for more details.
