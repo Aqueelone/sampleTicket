@@ -1,29 +1,29 @@
 development:
   adapter: postgresql
-  database: sampleTicketDev
+  database: aqupostgres
   encoding: unicode
   pool: 16
-  username: su
-  password: su
-  host: localhost
+  username: aqusu
+  password: AquSoftBistro
+  host: aqu-postgre.cchjybjthc9l.us-west-2.rds.amazonaws.com
   
 test: &TEST
   adapter: postgresql
-  database: sampleTicketTest
+  database: aqutestpg
   encoding: unicode
   pool: 16
-  username: su
-  password: su
-  host: localhost
+  username: aqusu
+  password: AquSoftBistro
+  host: aqupostgres-test.cchjybjthc9l.us-west-2.rds.amazonaws.com
 
 production:
-  adapter: sampleTicket
-  database: postgres
+  adapter: postgresql
+  database: aqupostgres
   pool: 16
   encoding: unicode
-  username: su
-  password: su
-  host: localhost
+  username: aqusu
+  password: AquSoftBistro
+  host: aqu-postgre.cchjybjthc9l.us-west-2.rds.amazonaws.com
   
 cucumber:
   <<: *TEST
