@@ -1,11 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  description: MyText
-  user_id: 1
+  title: open ticket
+  description: open ticket for test
+  user_id: 2
+  ticket_status_id: 1
+  ticket_category_id: 1
 
 two:
-  title: MyString
-  description: MyText
-  user_id: 1
+  title: aproved ticket
+  description: aproved ticket for test
+  user_id: 1  
+  ticket_status_id: 2
+  ticket_category_id: 2
+  
+three:
+  title: closed ticket
+  description: closed ticket for test
+  user_id: 2  
+  ticket_status_id: 3
+  ticket_category_id: 3

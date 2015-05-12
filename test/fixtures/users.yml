@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  name: test_one
+  email: test_one@sample.ticket.com
   is_admin: false
+  is_moderator: true
 
 two:
-  name: MyString
+  name: test_two
+  email: test_two@sample.ticket.com
   is_admin: false
+  is_moderator: false
