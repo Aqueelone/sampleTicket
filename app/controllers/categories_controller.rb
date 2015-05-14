@@ -22,6 +22,17 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # GET /categories/1
+  def show
+    @category = Category.find(params[:id])
+    @tickets = @category.tickets   
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @category }
+    end
+  end
+  
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])

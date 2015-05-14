@@ -22,6 +22,27 @@ class TicketStatusesController < ApplicationController
     end
   end
 
+  # GET /ticket_statuses/1
+  def show
+    @ticket_status = TicketStatus.find(params[:id])
+    
+    if current_user
+      if current_user.is_admin || current_user.is_moderator
+        @tickets = @ticket_status.tickets
+      else
+        @tickets = @ticket_status.tickets.where(user_id: current_user.id)
+      end
+    else
+      demo_id = User.where(name: "demo").last.id
+      @tickets = @ticket_status.tickets.where(user_id: demo_id)
+    end
+           
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @ticket_status }
+    end
+  end
+  
   # GET /ticket_statuses/1/edit
   def edit
     @ticket_status = TicketStatus.find(params[:id])

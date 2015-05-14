@@ -21,6 +21,7 @@
     <td><%= category.name %></td>
     <td><%= category.tickets.count %></td>
     <td>
+      <%= bootstrap_icon_link_to 'Show', category, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
       <%= bootstrap_icon_link_to 'Edit', edit_category_path(category), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
       <%= bootstrap_icon_link_to 'Delete', category, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
     </td>

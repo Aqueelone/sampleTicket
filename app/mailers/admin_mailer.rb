@@ -15,7 +15,7 @@ class AdminMailer < ActionMailer::Base
   end
   
   def ticket_email(ticket)
-    @user = ticket.user
+    @user = ticket.users
     @id = ticket.id
     @url = '/ticket/' << @id.to_s  
     email_with_name = %("#{@user.name}" <#{@user.email}>)
@@ -27,7 +27,7 @@ class AdminMailer < ActionMailer::Base
   end
   
   def ticket_update_email(ticket)
-    @user = ticket.user
+    @user = ticket.users
     @id = ticket.id
     @url = '/ticket/' << @id.to_s 
     email_with_name = %("#{@user.name}" <#{@user.email}>)

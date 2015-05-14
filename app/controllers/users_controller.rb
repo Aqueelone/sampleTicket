@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   
-  # GET /users
-  # GET /users.json
+  # GET /users GET /users.json
   def index
     @users = User.includes(:tickets).order("name ASC")
 
@@ -12,19 +11,25 @@ class UsersController < ApplicationController
     end
   end
   
-  # GET /users/show
-  # GET /users/show.json
+  # GET /users/1 GET /users/1.json
   def show
-    @users = User.includes(:tickets).order("name ASC")
+    @user = User.find(params[:id])
+    @tickets = @user.tickets
 
-    respond_to do |format|
-      format.html {redirect_to root_url} # return to home 
-      format.json { render json: @users }
+    if current_user == @user || current_user.is_admin || current_user.is_moderator
+      respond_to do |format|
+        format.html # show.html.erb 
+        format.json { render json: @user }
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to root_url} # return to home 
+        format.json {redirect_to root_url} # return to home
+      end
     end
   end
   
-  # GET /users/new
-  # GET /users/new.json
+  # GET /users/new GET /users/new.json
   def new
     @user = User.new
 
@@ -39,8 +44,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
+  # POST /users POST /users.json
   def create
     @user = User.new(params[:user])
     @user.is_admin = User.count == 0
@@ -59,8 +63,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  # PUT /users/1 PUT /users/1.json
   def update
     @user = User.find(params[:id])
     @param = params[:user]
@@ -82,8 +85,7 @@ class UsersController < ApplicationController
 
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /users/1 DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
 

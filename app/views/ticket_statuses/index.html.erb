@@ -31,6 +31,7 @@
               <td><%= ticket_status.position %></td>
               <td><%= ticket_status.tickets.count %></td>
               <td>
+                  <%= bootstrap_icon_link_to 'Show', ticket_status, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
                   <%= bootstrap_icon_link_to 'Edit', edit_ticket_status_path(ticket_status), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
                   <%= bootstrap_icon_link_to 'Delete', ticket_status, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
               </td>

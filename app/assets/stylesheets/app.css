@@ -89,6 +89,12 @@ table tbody tr{
 .content{
     min-height: 600px;
 }
+fieldset {
+    display: inline-table;
+}
+fieldset legend {
+    background: none;
+}
 .zurb-footer-bottom {
     background: #333;
     padding: 10px 20px;

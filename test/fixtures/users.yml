@@ -3,11 +3,17 @@
 one:
   name: test_one
   email: test_one@sample.ticket.com
-  is_admin: false
-  is_moderator: true
+  is_admin: true
+  is_moderator: false
 
 two:
   name: test_two
   email: test_two@sample.ticket.com
+  is_admin: false
+  is_moderator: true
+
+three:
+  name: test_three
+  email: test_three@sample.ticket.com
   is_admin: false
   is_moderator: false
