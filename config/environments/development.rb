@@ -27,4 +27,9 @@ SampleTicket::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  config.preload_frameworks = true
+  config.allow_concurrency = true
+  
+  config.eager_load = true
 end

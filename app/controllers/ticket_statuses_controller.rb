@@ -1,10 +1,19 @@
 class TicketStatusesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user! , :only => [:new, :edit, :create, :update, :destroy]
+  
   # GET /ticket_statuses
   # GET /ticket_statuses.json
   def index
     @ticket_statuses = TicketStatus.includes(:tickets).order("position ASC")
 
+    if !(current_user.is_admin || current_user.is_moderator)
+      @ticket_statuses.each do |ticket_status|
+        if !ticket_status.users.include?(current_user)
+          @ticket_statuses.delete(ticket_status)
+        end
+      end
+    end   
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @ticket_statuses }

@@ -1,17 +1,29 @@
 class CategoriesController < ApplicationController
-  before_filter :authenticate_user!
-  # GET /categories
+  before_filter :authenticate_user! , :only => [:new, :edit, :create, :update, :destroy]
+  
+  # GET /categories 
   # GET /categories.json
   def index
-    @categories = Category.includes(:tickets).order("name ASC")
-
+    @categories = Category.joins(:tickets, :users).order("name ASC").uniq
+    
+    if !current_user.blank?
+      if !(current_user.is_admin || current_user.is_moderator)
+        @categories = @categories.where(users: {id: current_user.id}).uniq
+      end
+    end 
+    
+    if current_user.blank? || @categories.blank?
+      demo_id = User.where(name: "demo").last.id
+      @categories = Category.joins(:tickets, :users).where(users: {id: demo_id}).uniq
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @categories }
     end
   end
 
-  # GET /categories/new
+  # GET /categories/new 
   # GET /categories/new.json
   def new
     @category = Category.new
@@ -24,8 +36,18 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    @category = Category.find(params[:id])
-    @tickets = @category.tickets   
+    @category = Category.find(params[:id])    
+    @tickets = @category.tickets
+    
+    if current_user.blank?
+      show_user_id = User.where(name: "demo").last.id
+    else
+      show_user_id = current_user.id
+    end
+    
+    if current_user.blank? || !(current_user.is_admin || current_user.is_moderator)
+      @tickets = @tickets.where(user_id: show_user_id)
+    end
     
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +60,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
   end
 
-  # POST /categories
+  # POST /categories 
   # POST /categories.json
   def create
     @category = Category.new(params[:category])
@@ -54,7 +76,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PUT /categories/1
+  # PUT /categories/1 
   # PUT /categories/1.json
   def update
     @category = Category.find(params[:id])
@@ -70,7 +92,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
+  # DELETE /categories/1 
   # DELETE /categories/1.json
   def destroy
     @category = Category.find(params[:id])

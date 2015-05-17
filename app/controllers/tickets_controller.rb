@@ -5,23 +5,19 @@ class TicketsController < ApplicationController
   # GET /tickets 
   # GET /tickets.json
   def index
-    if current_user
-      user_id_temp = current_user.id
-    else
-      user_id_temp = 0
+    @tickets = Ticket.joins(:ticket_status, :category, :user).order('created_at DESC')
+    if !current_user.blank?
+      if !(current_user.is_admin || current_user.is_moderator)
+      @tickets = @tickets.where(user_id: current_user.id)
+      end
     end
     
-    if current_user && (current_user.is_admin || current_user.is_moderator)
-      @tickets = Ticket.includes(:category, :user, :ticket_status)
-    else @tickets = Ticket.includes(:category, :user, :ticket_status).where(user_id: user_id_temp)
-    end
-    
-    if(@tickets.blank?) 
+    if current_user.blank? || @tickets.blank?
       demo_id = User.where(name: "demo").last.id 
-      @tickets = Ticket.includes(:category, :user, :ticket_status).where(user_id: demo_id)
+      @tickets = Ticket.joins(:ticket_status, :category, :user).where(user_id: demo_id)
     end
     
-  respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tickets }
     end
@@ -31,10 +27,17 @@ class TicketsController < ApplicationController
   # GET /tickets/1.json
   def show
     @ticket = Ticket.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @ticket }
+    demo_id = User.where(name: "demo").last.id
+    if @ticket.user_id != demo_id && (current_user.blank? || (@ticket.user_id != current_user.id && !(current_user.is_admin || current_user.is_moderator)))
+      respond_to do |format|
+        format.html {redirect_to root_url} # return to home
+        format.json {redirect_to root_url} # return to home
+      end
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @ticket }
+      end
     end
   end
 

@@ -2,7 +2,9 @@
     <h1>
         User: <%= @user.name %>
     </h1>
-    <%= bootstrap_icon_link_to 'New User', new_user_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
+    <% if current_user.is_admin || current_user.is_moderator %>
+      <%= bootstrap_icon_link_to 'New User', new_user_path, "icon-plus icon-white", :class => "button btn btn-success right clearfix" %>
+    <% end %>
 </div>
 
 <%= show_flash %>
@@ -29,8 +31,12 @@
         <tr><td  scope="row">Tickets</td><td><%= @user.tickets.count %></td></tr>
         <tr><td  scope="row">SignInCount</td><td><%= @user.sign_in_count %></td></tr>
         <tr><td  scope="row"></td><td>
-                <%= bootstrap_icon_link_to 'Edit', edit_user_path(@user), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-                <%= bootstrap_icon_link_to 'Delete', @user, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                <% if current_user && (@user.id == current_user.id || current_user.is_admin || current_user.is_moderator) %>
+                  <%= bootstrap_icon_link_to 'Edit', edit_user_path(@user), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+                  <% if current_user.is_admin %>
+                    <%= bootstrap_icon_link_to 'Delete', @user, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                  <% end %>
+                <% end %>
             </td></tr>
     </table>
 </fieldset>
@@ -55,8 +61,12 @@
                   <td><%= link_to ticket.title, ticket %></td>
                   <td><%= ticket.user.name %></td>
                   <td>
-                      <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-                      <%= bootstrap_icon_link_to 'Delete', ticket, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                      <% if current_user && (ticket.user_id == current_user.id || current_user.is_admin || current_user.is_moderator) %>
+                        <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+                        <% if current_user.is_admin %>
+                          <%= bootstrap_icon_link_to 'Delete', ticket, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                        <% end %>
+                      <% end %>
                   </td>
               </tr>
             <% end %>

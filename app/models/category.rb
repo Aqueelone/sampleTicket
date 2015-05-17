@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
   has_many :tickets
+  has_many :users, :through => :tickets 
+  
   attr_accessible :name
   validates :name, presence: true
   

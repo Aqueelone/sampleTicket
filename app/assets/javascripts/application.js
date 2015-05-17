@@ -13,6 +13,7 @@
 //= require jquery_ujs
 //= require foundation.min
 //= require underscore
+//= require comments
 //= require_tree .
 
 $(document).foundation();

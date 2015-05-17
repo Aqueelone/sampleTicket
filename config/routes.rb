@@ -8,7 +8,7 @@ SampleTicket::Application.routes.draw do
   
   resources :ticket_statuses
   
-  resources :comment
+  resources :comments, only: [:new, :create, :index]
   
   root :to => 'tickets#index'
   

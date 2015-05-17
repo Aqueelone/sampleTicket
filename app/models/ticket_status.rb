@@ -1,5 +1,6 @@
 class TicketStatus < ActiveRecord::Base
   has_many :tickets
+  has_many :users, :through => :tickets
   
   attr_accessible :name, :position, :is_moderable, :is_closed
   validates :name, :position, presence: true

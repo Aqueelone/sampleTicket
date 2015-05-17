@@ -19,10 +19,10 @@
   <tbody>
 <% @tickets.each do |ticket| %>
   <tr>
-    <td><%= ticket_status_label ticket.ticket_status.name %></td>
-    <td><%= ticket.category.name %></td>
+    <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %></td>
+    <td><%= link_to ticket.category.name, ticket.category %></td>
     <td><%= link_to ticket.title, ticket %></td>
-    <td><%= ticket.user.name %></td>
+    <td><%= link_to ticket.user.name, ticket.user %></td>
   </tr>
 <% end %>
 </tbody>
