@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>
-        Ticket Status: <%= @ticket_status.name %>
+        <%= current_user && (current_user.is_admin || current_user.is_moderator) ? "List of" : "My"%> ticket with ticket status: <%= @ticket_status.name %>
     </h1>
     <% if current_user && (current_user.is_admin || current_user.is_moderator) %>
       <%= bootstrap_icon_link_to 'New Ticket Status', new_ticket_status_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>

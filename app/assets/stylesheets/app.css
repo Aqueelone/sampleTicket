@@ -26,7 +26,9 @@ and open the template in the editor.
     background: url(logo2.png) 8px 1px no-repeat;
     padding-left: 35px;
 }
-
+h1 {
+    margin: auto !important;
+}
 form label{
     color: #333;   
     font-size: 1.2em;
@@ -77,7 +79,7 @@ table thead tr{
 }
 table thead tr > th{
     color: white;
-    text-shadow: #333 1px 0px 2px;
+    text-shadow: #333 1px 1px 2px;
     text-transform: lowercase;
     font-size: 1em;;
 }
@@ -86,6 +88,7 @@ table tbody tr{
     border-left-width: 2px;  
     border-right-width: 3px;
 }
+
 .content{
     min-height: 600px;
 }
@@ -94,6 +97,14 @@ fieldset {
 }
 fieldset legend {
     background: none;
+}
+span.label a{
+    color: white;
+    text-shadow: 0px 0px 1px black;
+}
+span.label a:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
 }
 .zurb-footer-bottom {
     background: #333;

@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>
-        List of ticket_statuses
+        <%= current_user && (current_user.is_admin || current_user.is_moderator) ? "List of" : "My"%> ticket statuses:
     </h1>
     <%= bootstrap_icon_link_to 'New Ticket Status', new_ticket_status_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
 </div>
@@ -19,7 +19,7 @@
     <tbody>
         <% @ticket_statuses.each do |ticket_status| %>
           <tr>
-              <td><%= ticket_status.name %>
+              <td><%= ticket_status_label link_to ticket_status.name, ticket_status %>
                   <div class="clearfix"></div>
                     <% if ticket_status.is_moderable %>
                     <span class="label label-info">moderable</span>

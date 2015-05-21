@@ -4,15 +4,13 @@ class TicketStatusesController < ApplicationController
   # GET /ticket_statuses
   # GET /ticket_statuses.json
   def index
-    @ticket_statuses = TicketStatus.includes(:tickets).order("position ASC")
-
-    if !(current_user.is_admin || current_user.is_moderator)
-      @ticket_statuses.each do |ticket_status|
-        if !ticket_status.users.include?(current_user)
-          @ticket_statuses.delete(ticket_status)
-        end
-      end
-    end   
+    @ticket_statuses = TicketStatus.eager_load(:tickets, :users).order("position ASC") if current_user
+    
+    @ticket_statuses = @ticket_statuses
+          .where(users: {id: current_user.id}) if current_user && !(current_user.is_admin || current_user.is_moderator)
+    
+    @ticket_statuses = TicketStatus.eager_load(:tickets, :users)
+          .where(users: {name: "demo"}) if !current_user || @ticket_statuses.empty?   
     
     respond_to do |format|
       format.html # index.html.erb

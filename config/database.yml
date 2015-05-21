@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  database: sampleTicketDevNew
+  database: sampleTicketDev
   encoding: unicode
   pool: 16
   username: su
@@ -18,7 +18,7 @@ test: &TEST
 
 production:
   adapter: postgresql
-  database: sampleTicketNew
+  database: sampleTicket
   pool: 16
   encoding: su
   username: su

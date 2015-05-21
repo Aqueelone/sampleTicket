@@ -3,7 +3,7 @@
         User: <%= @user.name %>
     </h1>
     <% if current_user.is_admin || current_user.is_moderator %>
-      <%= bootstrap_icon_link_to 'New User', new_user_path, "icon-plus icon-white", :class => "button btn btn-success right clearfix" %>
+      <%= bootstrap_icon_link_to 'New User', new_user_path, "icon-plus icon-white", :class => "button btn btn-success" %>
     <% end %>
 </div>
 
@@ -49,17 +49,15 @@
                 <th  scope="column">Status</th>    
                 <th  scope="column">Category</th>
                 <th  scope="column">Title</th>
-                <th  scope="column">Feedback by</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <% @tickets.each do |ticket| %>
               <tr>
-                  <td><%= ticket_status_label ticket.ticket_status.name %></td>
-                  <td><%= ticket.category.name %></td>
+                  <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %></td>
+                  <td><%= link_to ticket.category.name, ticket.category %></td>
                   <td><%= link_to ticket.title, ticket %></td>
-                  <td><%= ticket.user.name %></td>
                   <td>
                       <% if current_user && (ticket.user_id == current_user.id || current_user.is_admin || current_user.is_moderator) %>
                         <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>

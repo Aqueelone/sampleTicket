@@ -5,16 +5,17 @@ class TicketsController < ApplicationController
   # GET /tickets 
   # GET /tickets.json
   def index
-    @tickets = Ticket.joins(:ticket_status, :category, :user).order('created_at DESC')
-    if !current_user.blank?
-      if !(current_user.is_admin || current_user.is_moderator)
-      @tickets = @tickets.where(user_id: current_user.id)
-      end
-    end
+    @tickets = Ticket.eager_load(:ticket_status, :category, :user).order("tickets.created_at DESC")
     
-    if current_user.blank? || @tickets.blank?
-      demo_id = User.where(name: "demo").last.id 
-      @tickets = Ticket.joins(:ticket_status, :category, :user).where(user_id: demo_id)
+    if current_user
+      if !(current_user.is_admin || current_user.is_moderator)
+        @tickets = @tickets.where(users: {id: current_user.id})
+      end
+    end 
+    
+    if !current_user || @tickets.blank?
+      demo_id = User.where(name: "demo").last.id
+      @tickets = Ticket.eager_load(:ticket_status, :category, :user).where(users: {id: demo_id})
     end
     
     respond_to do |format|

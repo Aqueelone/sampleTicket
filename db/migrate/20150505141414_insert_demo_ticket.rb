@@ -5,7 +5,7 @@ class InsertDemoTicket < ActiveRecord::Migration
     @ticket_status = TicketStatus.where(name: "Open").last
     Ticket.create([{
         title: "demo ticket", 
-        description: 'This is a demo ticket. \r\n If You press button "new ticket", You could make a new ticket. \r\n\r\n ATENTION! Sing in or sign up is requered.',
+        description: 'This is a demo ticket. \\r\\n If You press button "new ticket", You could make a new ticket. \\r\\n\\r\\n ATENTION! Sing in or sign up is requered.',
         user_id: @user.id,
         category_id: @category.id,
         ticket_status_id: @ticket_status.id

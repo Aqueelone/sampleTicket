@@ -4,18 +4,12 @@ class CategoriesController < ApplicationController
   # GET /categories 
   # GET /categories.json
   def index
-    @categories = Category.joins(:tickets, :users).order("name ASC").uniq
+    @categories = Category.eager_load(:tickets, :users) if current_user
     
-    if !current_user.blank?
-      if !(current_user.is_admin || current_user.is_moderator)
-        @categories = @categories.where(users: {id: current_user.id}).uniq
-      end
-    end 
-    
-    if current_user.blank? || @categories.blank?
-      demo_id = User.where(name: "demo").last.id
-      @categories = Category.joins(:tickets, :users).where(users: {id: demo_id}).uniq
-    end
+    @categories = @categories.where(users: {id: current_user.id})
+                .uniq if current_user && !(current_user.is_admin || current_user.is_moderator)
+      
+    @categories = Category.eager_load(:tickets, :users).where(users: {name: "demo"})  if !current_user || @categories.empty?
     
     respond_to do |format|
       format.html # index.html.erb

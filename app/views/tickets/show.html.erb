@@ -21,15 +21,15 @@
         </tr>
         <tr>
             <td class="top"><b>Status:</b></td>
-            <td><%= ticket_status_label @ticket.ticket_status.name %></td>
+            <td><%= ticket_status_label link_to @ticket.ticket_status.name, @ticket.ticket_status %></td>
         </tr>
         <tr>
             <td class="top"><b>Category:</b></td>
-            <td><%= @ticket.category.name %></td>
+            <td><%= link_to @ticket.category.name, @ticket.category %></td>
         </tr>
         <tr>
             <td class="top"><b>Feedback by:</b></td>
-            <td><%= @ticket.user.name %></td>
+            <td><%= link_to @ticket.user.name, @ticket.user %></td>
         </tr>
         <tr>
             <td class="top"><b>Title:</b></td>

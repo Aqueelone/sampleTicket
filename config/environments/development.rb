@@ -30,6 +30,4 @@ SampleTicket::Application.configure do
   
   config.preload_frameworks = true
   config.allow_concurrency = true
-  
-  config.eager_load = true
 end

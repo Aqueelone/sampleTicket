@@ -17,3 +17,4 @@
 //= require_tree .
 
 $(document).foundation();
+$(".alert").slideUp(9000 );
