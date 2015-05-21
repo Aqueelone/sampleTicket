@@ -20,4 +20,3 @@ See the [INSTALL](INSTALL.md) file for more details.
 3. Minichat with SSE integrations
 4. Fixing of tests
 5. Deploying to Amazon AWS
-6. JIT? 
