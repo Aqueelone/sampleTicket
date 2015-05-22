@@ -47,9 +47,10 @@ See more:
 [Support Ticket Best Practices](https://www.h2desk.com/blog/customers-easy-support/)
 
 ##TO-DO
-
-1. Comment system
-2. Widgets such as "Waiting for clients", "Waiting for aproving" etc.
+1. Widgets System such as "Waiting for clients", "Waiting for aproving" etc. with widget templates and windgets rules sets
+2. Responsible persons assigments system
+3. "Ticket Escalation System"
+4. Comment system
 3. Minichat with SSE integrations
 4. Fixing of tests
 5. Deploying to Amazon AWS
