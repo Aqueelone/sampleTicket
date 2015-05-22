@@ -11,7 +11,7 @@ Prepared for forking and copying as is.
 sampleTicket is a traditional Ruby on Rails application, meaning that you can
 configure and run it the way you would a normal Rails application.
 
-See the  file for more details.
+See the [INSTALL](INSTALL.md) file for more details.
 
 ## Issue resolution process:
 1. Customer signed up in system.
