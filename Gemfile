@@ -44,6 +44,13 @@ gem 'capistrano-rails', group: :development
 
 gem 'actionmailer'
 
+gem 'whenever'
+
+gem 'tinymce-rails'
+
+gem 'less-rails'
+gem 'therubyracer'
+
 # Use debugger
 #gem 'debugger', group: [:development, :test]
 

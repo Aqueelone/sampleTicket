@@ -21,8 +21,7 @@
         </tr>
         <tr>
             <td class="top"><b>Status:</b></td>
-            <td><%= ticket_status_label link_to @ticket.ticket_status.name, @ticket.ticket_status %></td>
-        </tr>
+            <td><%= ticket_status_label link_to @ticket.ticket_status.name, @ticket.ticket_status %></tr>
         <tr>
             <td class="top"><b>Category:</b></td>
             <td><%= link_to @ticket.category.name, @ticket.category %></td>
@@ -33,7 +32,15 @@
         </tr>
         <tr>
             <td class="top"><b>Title:</b></td>
-            <td><%= @ticket.title %></td>
+            <td><%= @ticket.title %>            
+                <div class="clearfix"></div>
+                <% if @ticket.ticket_status.is_moderable %>
+                  <span class="label label-info">assigned</span>
+                <% end %>                    
+                <% if @ticket.ticket_status.is_closed %>
+                  <span class="label label-info">solved</span>
+                <% end %>
+        </td>
         </tr>
         <tr>
             <td class="top"><b>Created:</b></td>

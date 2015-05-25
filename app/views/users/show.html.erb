@@ -55,9 +55,17 @@
         <tbody>
             <% @tickets.each do |ticket| %>
               <tr>
-                  <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %></td>
+                  <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %> </td>
                   <td><%= link_to ticket.category.name, ticket.category %></td>
-                  <td><%= link_to ticket.title, ticket %></td>
+                  <td><%= link_to ticket.title, ticket %>                                
+                      <div class="clearfix"></div>
+                      <% if ticket.ticket_status.is_moderable %>
+                        <span class="label label-info">assigned</span>
+                      <% end %>                    
+                      <% if ticket.ticket_status.is_closed %>
+                        <span class="label label-info">solved</span>
+                      <% end %>
+                  </td>
                   <td>
                       <% if current_user && (ticket.user_id == current_user.id || current_user.is_admin || current_user.is_moderator) %>
                         <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>

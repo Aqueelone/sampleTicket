@@ -10,7 +10,7 @@ and open the template in the editor.
 
 .inner-wrap {
     background: url(back.jpg) 160px 0px repeat;
-    height: 100%;
+    background-attachment: fixed;
 }
 
 .container {
@@ -39,7 +39,14 @@ div.field select, div.field input, div.field textarea{
     background-color: #ddf;
     border: #ddf solid 2px;
     box-shadow: #09f 1px 2px 2px;    
-    height: 40px;
+    height: 40px; 
+}
+div.field input{       
+    font-size: 1em;
+}
+div.field select{
+    font-size: 0.9em;
+    height: 2.6em;
 }
 .alert{
     color: red;
@@ -50,15 +57,25 @@ div.field select, div.field input, div.field textarea{
 .form-actions{
     padding: 10px 0px;
 }
+.page-header{
+    min-height: 30px;
+}
+.page-header a.button{
+    margin: 15px 5px;
+}
 a.button, input.button{
     border-radius: 9px !important;
     border: #09f solid 2px;
     color: #333;
     text-shadow: white 1px 0px 1px;
+    box-shadow: 0px 1px 0px black, 1px 1px 1px #09f;
     text-transform: uppercase;
     font-style: italic;
     font-size: 1.2em;    
     margin: 5px;
+}
+button span{    
+    text-shadow: 1px 1px 0px white;
 }
 table a.button, tabble input.button{
     font-size: 1em;
@@ -98,9 +115,9 @@ fieldset {
 fieldset legend {
     background: none;
 }
-span.label a{
+span.label a, span.label-info{
     color: white;
-    text-shadow: 0px 0px 1px black;
+    text-shadow: 0px 1px 0px black;
 }
 span.label a:hover {
     color: white;

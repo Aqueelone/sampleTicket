@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :tickets
+  has_many :widgets
   has_many :ticket_statuses, :through => :tickets  
   has_many :categories, :through => :tickets
 

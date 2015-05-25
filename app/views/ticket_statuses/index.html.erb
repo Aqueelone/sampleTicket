@@ -1,41 +1,48 @@
 <div class="page-header">
-    <h1>
-        <%= current_user && (current_user.is_admin || current_user.is_moderator) ? "List of" : "My"%> ticket statuses:
-    </h1>
-    <%= bootstrap_icon_link_to 'New Ticket Status', new_ticket_status_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
+    <% if current_user && (current_user.is_admin || current_user.is_moderator) %>
+      <%= bootstrap_icon_link_to 'New Ticket Status', new_ticket_status_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
+    <% end %>
 </div>
 
 <%= show_flash %>
 
-<table class="table table-striped table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Tickets</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @ticket_statuses.each do |ticket_status| %>
-          <tr>
-              <td><%= ticket_status_label link_to ticket_status.name, ticket_status %>
-                  <div class="clearfix"></div>
-                    <% if ticket_status.is_moderable %>
-                    <span class="label label-info">moderable</span>
-                    <% end %>                    
-                    <% if ticket_status.is_closed %>
-                    <span class="label label-info">closed</span>
-                    <% end %>
-              </td>
-              <td><%= ticket_status.position %></td>
-              <td><%= ticket_status.tickets.count %></td>
-              <td>
-                  <%= bootstrap_icon_link_to 'Show', ticket_status, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
-                  <%= bootstrap_icon_link_to 'Edit', edit_ticket_status_path(ticket_status), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-                  <%= bootstrap_icon_link_to 'Delete', ticket_status, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
-              </td>
-          </tr>
-        <% end %>
-    </tbody>
-</table>
+<fieldset>
+    <legend><%= current_user && (current_user.is_admin || current_user.is_moderator) ? "List of" : "My"%> ticket statuses:</legend>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Tickets</th>
+                <th>Label</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @ticket_statuses.each do |ticket_status| %>
+              <tr>
+                  <td><%= ticket_status_label link_to ticket_status.name, ticket_status %></td>
+                  <td><%= ticket_status.position %></td>
+                  <td><%= ticket_status.tickets.count %></td>
+                  <td>
+                      <% if ticket_status.is_moderable %>
+                        <span class="label label-info">assigned</span>
+                      <% end %>                    
+                      <% if ticket_status.is_closed %>
+                        <span class="label label-info">solved</span>
+                      <% end %>
+                  </td>
+                  <td>
+                      <%= bootstrap_icon_link_to 'Show', ticket_status, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
+                      <% if current_user && (current_user.is_admin || (current_user.is_moderator && !ticket_status.is_closed)) %>
+                        <%= bootstrap_icon_link_to 'Edit', edit_ticket_status_path(ticket_status), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+                        <% if current_user.is_admin %> 
+                          <%= bootstrap_icon_link_to 'Delete', ticket_status, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                        <% end %>
+                      <% end %>
+                  </td>
+              </tr>
+            <% end %>
+        </tbody>
+    </table>
+</fieldset>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505152512) do
+ActiveRecord::Schema.define(version: 20150522182000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,5 +61,36 @@ ActiveRecord::Schema.define(version: 20150505152512) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "widget_rules", force: true do |t|
+    t.integer  "controlled_id"
+    t.string   "controlled_type"
+    t.boolean  "allow",           default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "widget_rules", ["controlled_id", "controlled_type"], name: "index_widget_rules_on_controlled_id_and_controlled_type", using: :btree
+
+  create_table "widgets", force: true do |t|
+    t.string   "name"
+    t.integer  "template_id"
+    t.integer  "user_id"
+    t.boolean  "is_admited",   default: false
+    t.boolean  "is_moderable", default: false
+    t.boolean  "is_template",  default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "widgets", ["template_id"], name: "index_widgets_on_template_id", using: :btree
+
+  create_table "widgets_widget_rules", id: false, force: true do |t|
+    t.integer "widgets_id"
+    t.integer "widget_rules_id"
+  end
+
+  add_index "widgets_widget_rules", ["widget_rules_id"], name: "index_widgets_widget_rules_on_widget_rules_id", using: :btree
+  add_index "widgets_widget_rules", ["widgets_id"], name: "index_widgets_widget_rules_on_widgets_id", using: :btree
 
 end

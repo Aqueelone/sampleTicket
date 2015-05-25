@@ -34,11 +34,8 @@ class TicketStatusesController < ApplicationController
     @ticket_status = TicketStatus.find(params[:id])
     
     if current_user
-      if current_user.is_admin || current_user.is_moderator
-        @tickets = @ticket_status.tickets
-      else
-        @tickets = @ticket_status.tickets.where(user_id: current_user.id)
-      end
+      @tickets = @ticket_status.tickets
+      @tickets = @tickets.where(user_id: current_user.id) if !(current_user.is_admin || current_user.is_moderator)
     else
       demo_id = User.where(name: "demo").last.id
       @tickets = @ticket_status.tickets.where(user_id: demo_id)

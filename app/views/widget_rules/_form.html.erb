@@ -1,0 +1,26 @@
+<%= form_for(@widget_rule) do |f| %>
+ <% if @widget_rule.errors.any? %>
+    <div class="alert alert-error">
+        <b><%= pluralize(@widget_rule.errors.count, "error") %> prohibited this widget_rule from being saved:</b>
+
+        <ul>
+            <% @widget_rule.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :controlled %>
+      <%= f.select :controlled, @controlleds.map { |c| ["[#{c.class.name}] #{c.name}", "#{c.class.name}:#{c.id}"] }, :include_blank => false %>
+  </div>
+<div class="left">    
+            <%= f.label :allow %>
+            <%= f.check_box :allow %>
+        </div>
+  <div class="form-actions">
+      <%= f.submit :class => "button btn btn-success" %><br />
+      <%= link_to 'Cancel', widget_rules_path %>
+  </div>
+<% end %>

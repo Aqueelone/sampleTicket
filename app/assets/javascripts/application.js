@@ -14,6 +14,7 @@
 //= require foundation.min
 //= require underscore
 //= require comments
+//= require tinymce-jquery
 //= require_tree .
 
 $(document).foundation();
