@@ -1,5 +1,5 @@
 default:
-  selector: textarea
+  selector: textarea.tinymce
   skin_url: '/assets/sampletickettinymce'
   toolbar: 
   - styleselect | bold italic | undo redo | table | image | link | insertdatetime | legacyoutput | media | preview | forecolor | backcolor | textpattern | emoticons | code

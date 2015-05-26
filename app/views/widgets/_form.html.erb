@@ -17,25 +17,37 @@
   </div>
   <div class="field">
       <%= f.label :template %>
-      <%= f.select :template, @templates, :include_blank => true %>
+      <%= f.select :template, @templates, :include_blank => true, :class => "select_template" %>
   </div>
   <div class="field">
       <%= f.label :widget_rules %>
       <%= f.select :widget_rules, @widget_rules, 
-        { :prompt => "Please select (mulriple select with 'cntrl' key) rules as it is necessary!"}, 
-        { :multiple => true, :size => @widget_rules.length + 1, :class => "multiselect" } %>
+        { :prompt => "Please, select template..."}, 
+        { :multiple => true, :disabled => true, :size => @widget_rules.length + 1, :class => "multiselect" } %>
   </div>
-  <div class="field left">    
+  <div class="field inline">    
+      <%= f.label :is_readonly %>
+      <%= f.check_box :is_readonly %>
+  </div>
+  <div class="field inline">    
       <%= f.label :is_template %>
       <%= f.check_box :is_template %>
   </div>
-  <div class="field right">    
+  <div class="field inline">    
       <%= f.label :is_moderable %>
       <%= f.check_box :is_moderable %>
   </div>
-  <div class="field right">    
+  <div class="field inline">    
       <%= f.label :is_admited %>
       <%= f.check_box :is_admited %>
+  </div>
+<div class="field clearfix">
+        <%  if current_user.is_admin || current_user.is_moderator %>
+          <%= f.label :user_id, "Owned by " %>
+          <%= f.select :user_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => false %>
+        <% else %>
+          <%= f.hidden_field :user_id, :value => current_user.id, :class => "span5 hidden" %>
+        <% end %>
   </div>
   <div class="form-actions">
       <%= f.submit :class => "button btn btn-success" %><br />

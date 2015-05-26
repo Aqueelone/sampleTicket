@@ -12,7 +12,9 @@ SampleTicket::Application.routes.draw do
   
   resources :ticket_statuses
   
-  resources :widgets
+  resources :widgets do
+    get :get_template 
+  end
   
   resources :widget_rules
   

@@ -11,6 +11,7 @@ class AddWidgetsAndWidgetRules < ActiveRecord::Migration
       t.boolean :is_admited, default: false
       t.boolean :is_moderable, default: false
       t.boolean :is_template, default: false
+      t.boolean :is_readonly, default: true
       t.timestamps null: false    
     end
     create_table :widget_rule_widgets, force: true, id: false do |t|

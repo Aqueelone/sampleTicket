@@ -10,11 +10,13 @@
 //= require vendor/modernizr
 //= require vendor/placeholder
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation.min
 //= require underscore
 //= require comments
 //= require tinymce-jquery
+//= require turbolinks
 //= require_tree .
 
 $(document).foundation();

@@ -44,15 +44,15 @@ class WidgetsController < ApplicationController
     end
     
     @tickets = Ticket.joins(:category, :ticket_status, :user)
-    .where("tickets.category_id IN(#{@category_ids.chomp(',')}) AND tickets.ticket_status_id IN(#{@status_ids.chomp(',')})")
+    .where("tickets.category_id IN(#{@category_ids.chomp(',')}) AND tickets.ticket_status_id IN(#{@status_ids.chomp(',')})")    
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @tickets }
+      format.json { render json: @widget}
     end
   end
   
-  # GET /ticket_statuses/1/edit
+  # GET /widgets/1/edit
   def edit
     @widget = Widget.find(params[:id])
     @widget_rules_selected_id = @widget.widget_rules.map {|r| r.id}
@@ -62,8 +62,18 @@ class WidgetsController < ApplicationController
     .map { |c| ["[#{c.controlled_type}] #{c.controlled.name}", c.id] }
     .map { |c| @widget_rules_selected_id.include?(c.last) ? c.push({selected: c.last}) : c}
   end
+  
+  # GET /widgets/1/get_template.json
+  def get_template
+    @widget = Widget.find(params[:widget_id])
+    @widget_rules_selected_id = @widget.widget_rules.map {|r| r.id}
+    
+    respond_to do |format|
+      format.json { render json: @widget_rules_selected_id }
+    end
+  end
 
-  # POST /ticket_statuses POST /ticket_statuses.json
+  # POST /widgets POST /widgets.json
   def create
     @widget = Widget.new(params[:widget])
     
@@ -78,7 +88,7 @@ class WidgetsController < ApplicationController
     end
   end
 
-  # PUT /ticket_statuses/1 PUT /ticket_statuses/1.json
+  # PUT /widgets/1 PUT /widgets/1.json
   def update
     @widget = Widget.find(params[:id])
 
@@ -93,7 +103,7 @@ class WidgetsController < ApplicationController
     end
   end
 
-  # DELETE /ticket_statuses/1 DELETE /ticket_statuses/1.json
+  # DELETE /widgets/1 DELETE /widgets/1.json
   def destroy
     @widget = Widget.find(params[:id])
     
@@ -103,13 +113,6 @@ class WidgetsController < ApplicationController
       @widget.destroy
       redirect_to widgets_url, notice: "Widget successfully deleted."
     end
-  end
-  
-  def rules_process(widget_rules = WidgetRule.new)
-    result =''
-    widget_rules.each { |rule| result += (rule.allow ? "" : "not") 
-      + "#{[rule.controlled.table]}.id = #{[rule.controlled.id]} AND" }
-    return result.chomp(" AND")
   end
 
 end

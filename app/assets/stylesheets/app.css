@@ -50,6 +50,20 @@ div.field select{
     font-size: 0.9em;
     height: 2.6em;
 }
+div.field.inline{
+    display:inline;    
+    padding: 1em;
+}
+div.field.inline label{
+    display: inline;
+}
+div.field.inline input{    
+    height: 0.8em;
+}
+div.field select.multiselect[disabled] > option[selected]{
+    color: white;
+    background-color: #007095;
+}
 .alert{
     color: red;
 }

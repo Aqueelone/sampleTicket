@@ -36,6 +36,7 @@
                                     <li><%= link_to 'My Categories', categories_path %></li>
                                     <li><%= link_to 'My Statuses', ticket_statuses_path %></li>                                    
                                   <% end %>
+                                  <li><%= link_to 'My Widgets', widgets_path %></li>
                                   <li><%= link_to 'My Profile', current_user %></li>
                                   <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
                                 <% else %>

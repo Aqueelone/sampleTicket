@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150522182000) do
     t.boolean  "is_admited",   default: false
     t.boolean  "is_moderable", default: false
     t.boolean  "is_template",  default: false
+    t.boolean  "is_readonly",  default: true
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end

@@ -51,6 +51,9 @@ gem 'tinymce-rails'
 gem 'less-rails'
 gem 'therubyracer'
 
+gem 'turbolinks'
+gem 'jquery-turbolinks'
+
 # Use debugger
 #gem 'debugger', group: [:development, :test]
 
