@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20150522182000) do
   create_table "widget_rules", force: true do |t|
     t.integer  "controlled_id"
     t.string   "controlled_type"
-    t.boolean  "allow",           default: true
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -86,11 +85,11 @@ ActiveRecord::Schema.define(version: 20150522182000) do
   add_index "widgets", ["template_id"], name: "index_widgets_on_template_id", using: :btree
 
   create_table "widgets_widget_rules", id: false, force: true do |t|
-    t.integer "widgets_id"
-    t.integer "widget_rules_id"
+    t.integer "widget_id"
+    t.integer "widget_rule_id"
   end
 
-  add_index "widgets_widget_rules", ["widget_rules_id"], name: "index_widgets_widget_rules_on_widget_rules_id", using: :btree
-  add_index "widgets_widget_rules", ["widgets_id"], name: "index_widgets_widget_rules_on_widgets_id", using: :btree
+  add_index "widgets_widget_rules", ["widget_rule_id"], name: "index_widgets_widget_rules_on_widget_rule_id", using: :btree
+  add_index "widgets_widget_rules", ["widget_id"], name: "index_widgets_widget_rules_on_widget_id", using: :btree
 
 end

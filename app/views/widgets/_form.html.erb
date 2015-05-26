@@ -1,0 +1,44 @@
+<%= form_for(@widget) do |f| %>
+  <% if @widget.errors.any? %>
+    <div class="alert alert-error">
+        <b><%= pluralize(@widget.errors.count, "error") %> prohibited this category from being saved:</b>
+
+        <ul>
+            <% @widget.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field  :name, :class => "span5" %>
+  </div>
+  <div class="field">
+      <%= f.label :template %>
+      <%= f.select :template, @templates, :include_blank => true %>
+  </div>
+  <div class="field">
+      <%= f.label :widget_rules %>
+      <%= f.select :widget_rules, @widget_rules, 
+        { :prompt => "Please select (mulriple select with 'cntrl' key) rules as it is necessary!"}, 
+        { :multiple => true, :size => @widget_rules.length + 1, :class => "multiselect" } %>
+  </div>
+  <div class="field left">    
+      <%= f.label :is_template %>
+      <%= f.check_box :is_template %>
+  </div>
+  <div class="field right">    
+      <%= f.label :is_moderable %>
+      <%= f.check_box :is_moderable %>
+  </div>
+  <div class="field right">    
+      <%= f.label :is_admited %>
+      <%= f.check_box :is_admited %>
+  </div>
+  <div class="form-actions">
+      <%= f.submit :class => "button btn btn-success" %><br />
+      <%= link_to 'Cancel', categories_path %>
+  </div>
+<% end %>

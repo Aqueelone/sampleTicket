@@ -33,7 +33,9 @@ form label{
     color: #333;   
     font-size: 1.2em;
 }
-
+select.multiselect {
+    height: auto !important;
+}
 div.field select, div.field input, div.field textarea{
     border-top-left-radius: 9px;
     background-color: #ddf;

@@ -15,10 +15,6 @@
       <%= f.label :controlled %>
       <%= f.select :controlled, @controlleds.map { |c| ["[#{c.class.name}] #{c.name}", "#{c.class.name}:#{c.id}"] }, :include_blank => false %>
   </div>
-<div class="left">    
-            <%= f.label :allow %>
-            <%= f.check_box :allow %>
-        </div>
   <div class="form-actions">
       <%= f.submit :class => "button btn btn-success" %><br />
       <%= link_to 'Cancel', widget_rules_path %>

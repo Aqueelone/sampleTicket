@@ -2,7 +2,6 @@ class AddWidgetsAndWidgetRules < ActiveRecord::Migration
   def self.up
     create_table :widget_rules , force: true do |t|
       t.references :controlled, polymorphic: true, index: true
-      t.boolean :allow, default: true      
       t.timestamps null: false    
     end
     create_table :widgets, force: true do |t|
@@ -14,9 +13,9 @@ class AddWidgetsAndWidgetRules < ActiveRecord::Migration
       t.boolean :is_template, default: false
       t.timestamps null: false    
     end
-    create_table :widgets_widget_rules, force: true, id: false do |t|
-      t.belongs_to :widgets, index: true
-      t.belongs_to :widget_rules, index: true
+    create_table :widget_rule_widgets, force: true, id: false do |t|
+      t.belongs_to :widget, index: true
+      t.belongs_to :widget_rule, index: true
     end
   end
 

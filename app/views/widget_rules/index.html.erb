@@ -10,18 +10,18 @@
 <table class="table table-striped table-bordered table-condensed">
     <thead>
         <tr>
-            <th></th>
             <th>Type</th>
             <th>Controlled</th>
+            <th>Tickets</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <% @widget_rules.each do |widget_rule| %>
           <tr>
-              <td><span class="label label-info"><%= widget_rule.allow ? "allow" : "deny" %></span></td>
               <td><%= widget_rule.controlled_type %></td>
               <td><%= widget_rule.controlled.name %></td>
+              <td><%= widget_rule.controlled.tickets.count %></td>
               <td>
                   <%= bootstrap_icon_link_to 'Show', widget_rule, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
                   <%= bootstrap_icon_link_to 'Edit', edit_widget_rule_path(widget_rule), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>

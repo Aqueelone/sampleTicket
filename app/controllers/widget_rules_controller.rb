@@ -1,8 +1,7 @@
 class WidgetRulesController < ApplicationController
-before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
-  # GET /widget_rules
-  # GET /widget_rules.json
+  # GET /widget_rules GET /widget_rules.json
   def index
     @widget_rules = WidgetRule.order("created_at DESC")
     
@@ -12,8 +11,7 @@ before_filter :authenticate_user!
     end
   end
   
-  # GET /widget_rules/new
-  # GET /widget_rules/new.json
+  # GET /widget_rules/new GET /widget_rules/new.json
   def new
     @widget_rule = WidgetRule.new
     @categories = Category.order("name ASC")
@@ -43,8 +41,7 @@ before_filter :authenticate_user!
     @controlleds = @categories + @ticket_statuses 
   end
 
-  # POST /widget_rules
-  # POST /widget_rules.json
+  # POST /widget_rules POST /widget_rules.json
   def create
     @widget_rule = WidgetRule.new(params[:widget_rule])
     controlled = params[:widget_rule][:controlled].split(":")
@@ -62,8 +59,7 @@ before_filter :authenticate_user!
     end
   end
 
-  # PUT /widget_rules/1
-  # PUT /widget_rules/1.json
+  # PUT /widget_rules/1 PUT /widget_rules/1.json
   def update
     @widget_rule = WidgetRule.find(params[:id])
     controlled = params[:widget_rule][:controlled].split(":")
@@ -81,16 +77,11 @@ before_filter :authenticate_user!
     end
   end
 
-  # DELETE /widget_rules/1
-  # DELETE /widget_rules/1.json
+  # DELETE /widget_rules/1 DELETE /widget_rules/1.json
   def destroy
-    @widget_rule = WidgetRule.find(params[:id])
-    
-    if @widget_rule.is_associated?
-      redirect_to widget_rule_url, alert: "Widget rule not deleted because associated to a widget."
-    else
-      @widget_rule.destroy
-      redirect_to widget_rule_url, notice: "Widget rule was successfully deleted."
-    end
+    @widget_rule = WidgetRule.find(params[:id])    
+
+    @widget_rule.destroy
+    redirect_to widget_rules_url, notice: "Widget rule was successfully deleted."
   end
 end
