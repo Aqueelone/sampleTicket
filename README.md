@@ -47,10 +47,16 @@ See more:
 * [Support Ticket Best Practices](https://www.h2desk.com/blog/customers-easy-support/)
 
 ##TO-DO
-1. Widgets System such as "Waiting for clients", "Waiting for aproving" etc. with widget templates and windgets rules sets
-2. Responsible persons assigments system
-3. "Ticket Escalation System"
-4. Comment system
-3. Minichat with SSE integrations
-4. Fixing of tests
-5. Deploying to Amazon AWS
+1. Dashboards and Guides for users with level separately
+(Dashbord have widgets such as "Waiting for users" etc, 
+guides (separately user-level, admin-level, moderator-level), sticked tickets etc. 
+2. Event System for history view etc. (all will write in .json)
+3. Responsible persons assigments system. 
+(Aftere user registrations, moderators can assign this user status "responsible person" and, 
+after this, can assign tickets to this person for accepting to work) 
+4. "Ticket Escalation System"
+(After user registration, moderators can assign SLA for his (P0, P1 etc.),
+assign SLA for category and this system observe time for working with sending message to responsible person)
+5. Comment system
+6. Fixing of tests
+7. Deploying to Amazon AWS
