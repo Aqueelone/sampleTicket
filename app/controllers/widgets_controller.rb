@@ -4,9 +4,8 @@ class WidgetsController < ApplicationController
 
   # GET /widgets GET /widgets.json
   def index
-    @widgets = Widget.eager_load(:widget_rules, :user, :ticket_statuses, :categories, :tickets)
-    .where(users: {id: current_user.id}).select("widget.*, ticket_status.* AS controlled.*, categories.* AS controlled.*") 
-    
+    @widgets = Widget.eager_load(:widget_rules, :user).where(users: {id: current_user.id}) 
+    @widget_rules = WidgetRule.includes(:controlled, :widgets).order("created_at DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @widgets }

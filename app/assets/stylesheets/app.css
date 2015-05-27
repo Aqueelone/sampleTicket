@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : root
 */
 
+table a {
+    color: #007095;
+  text-shadow: 1px 0.1px 0px #444;
+}
 .inner-wrap {
     background: url(back.jpg) 160px 0px repeat;
     background-attachment: fixed;

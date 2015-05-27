@@ -1,42 +1,37 @@
 <div class="page-header">
-  <h1>
-    List of Widgets
-  </h1>
     <%= bootstrap_icon_link_to 'New Widget', new_widget_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
 </div>
 
 <%= show_flash %>
 
-<table class="table table-striped table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Rules</th>
-            <th>Tickets</th>
-            <th>Statuses lebel</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @widgets.each do |widget| %>
-          <tr>
-              <td><%= link_to widget.name, widget %></td>
-              <td><%= widget.widget_rules.cont %></td>
-              <td><%= widget.tickets.count %></td>
-              <td>
-                  <% if widget.controlled.is_moderable %>
-                    <span class="label label-info">assigned</span>
-                  <% end %>                    
-                  <% if widget.controlled.is_closed %>
-                    <span class="label label-info">solved</span>
-                  <% end %>
-              </td>
-              <td>
-                  <%= bootstrap_icon_link_to 'Show', widget, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
-                  <%= bootstrap_icon_link_to 'Edit', edit_widget_path(widget), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-                  <%= bootstrap_icon_link_to 'Delete', widget, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
-              </td>
-          </tr>
-        <% end %>
-    </tbody>
-</table>
+<fieldset>
+    <legend>List of Widgets</legend>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rules</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @widgets.each do |widget| %>
+              <tr>
+                  <td><%= link_to widget.name, widget %></td>
+                  <td><%= widget.widget_rules.count %></td>
+                  <td>
+                      <% if widget.is_template %>
+                        <span class="label label-info">template</span>
+                      <% end %>
+                  </td>
+                  <td>
+                      <%= bootstrap_icon_link_to 'Show', widget, "icon-show icon-white", method: :get, :class => "button btn btn-small btn-primary" %>
+                      <%= bootstrap_icon_link_to 'Edit', edit_widget_path(widget), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+                      <%= bootstrap_icon_link_to 'Delete', widget, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                  </td>
+              </tr>
+            <% end %>
+        </tbody>
+    </table>
+</fieldset>

@@ -1,48 +1,48 @@
 <div class="page-header">
-    <h1>
-        <%= @widget.name %>
-    </h1>
-      <%= bootstrap_icon_link_to 'New Widget', new_widget_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
-      <%= bootstrap_icon_link_to 'Edit', edit_widget_path(@widget), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-      <%= bootstrap_icon_link_to 'Delete', @widget, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+    <%= bootstrap_icon_link_to 'New Widget', new_widget_path, "icon-plus icon-white", :class => "button btn btn-success  right" %>
+    <%= bootstrap_icon_link_to 'Edit', edit_widget_path(@widget), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+    <%= bootstrap_icon_link_to 'Delete', @widget, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
 </div>
 
 <%= show_flash %>
 
-<table role="grid" class="table table-striped table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th  scope="column">Status</th>
-            <th  scope="column">Title</th>
-            <th  scope="column">Feedback by</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @tickets.each do |ticket| %>
-          <tr>
-              <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %></td>
-              <td><%= link_to ticket.title, ticket %>
-                  <div class="clearfix"></div>
-                  <% if ticket.ticket_status.is_moderable %>
-                    <span class="label label-info">assigned</span>
-                  <% end %>                    
-                  <% if ticket.ticket_status.is_closed %>
-                    <span class="label label-info">solved</span>
-                  <% end %>
-              </td>
-              <td><%= link_to ticket.user.name, ticket.user %></td>
-              <td>
-                  <% if current_user && ((ticket.user_id == current_user.id && 
-                          !ticket.ticket_status.is_closed  && (!ticket.ticket_status.is_moderable)) || 
-                                                      current_user.is_admin || (current_user.is_moderator && !ticket.ticket_status.is_closed)) %>
-                    <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
-                    <% if current_user.is_admin %>
-                      <%= bootstrap_icon_link_to 'Delete', ticket, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
-                    <% end %>
-                  <% end %>
-              </td>
-          </tr>
-        <% end %>
-    </tbody>
-</table>
+<fieldset>
+    <legend>Tickets by <%= @widget.name %></legend>
+    <table role="grid" class="table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th  scope="column">Status</th>
+                <th  scope="column">Title</th>
+                <th  scope="column">Feedback by</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @tickets.each do |ticket| %>
+              <tr>
+                  <td><%= ticket_status_label link_to ticket.ticket_status.name, ticket.ticket_status %></td>
+                  <td><%= link_to ticket.title, ticket %>
+                      <div class="clearfix"></div>
+                      <% if ticket.ticket_status.is_moderable %>
+                        <span class="label label-info">assigned</span>
+                      <% end %>                    
+                      <% if ticket.ticket_status.is_closed %>
+                        <span class="label label-info">solved</span>
+                      <% end %>
+                  </td>
+                  <td><%= link_to ticket.user.name, ticket.user %></td>
+                  <td>
+                      <% if current_user && ((ticket.user_id == current_user.id && 
+                              !ticket.ticket_status.is_closed  && (!ticket.ticket_status.is_moderable)) || 
+                            current_user.is_admin || (current_user.is_moderator && !ticket.ticket_status.is_closed)) %>
+                        <%= bootstrap_icon_link_to 'Edit', edit_ticket_path(ticket), "icon-pencil icon-white", :class => "button btn btn-small btn-primary" %>
+                        <% if current_user.is_admin %>
+                          <%= bootstrap_icon_link_to 'Delete', ticket, "icon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger" %>
+                        <% end %>
+                      <% end %>
+                  </td>
+              </tr>
+            <% end %>
+        </tbody>
+    </table>
+</fieldset>
