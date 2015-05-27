@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :tickets
   has_many :widgets
+  has_one  :dashboard
   has_many :ticket_statuses, :through => :tickets  
   has_many :categories, :through => :tickets
 

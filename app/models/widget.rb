@@ -1,5 +1,6 @@
 class Widget < ActiveRecord::Base
   has_and_belongs_to_many :widget_rules
+  has_and_belongs_to_many :dashboards
   has_many :ticket_statuses, :through => :widget_rules, :source => :controlled, :source_type => :ticket_status
   has_many :categories, :through => :widget_rules, :source => :controlled, :source_type => :category
   has_many :from_templaters, class_name: "Widget", foreign_key: "template_id"

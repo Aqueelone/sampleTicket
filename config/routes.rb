@@ -1,8 +1,4 @@
 SampleTicket::Application.routes.draw do
-  get 'widgets/Widgets'
-
-  get 'widget_rules/WidgetRules'
-
   devise_for :users
   resources :users
   
@@ -17,6 +13,12 @@ SampleTicket::Application.routes.draw do
   end
   
   resources :widget_rules
+  
+  resources :dashboards
+
+  resources :guides
+  
+  resources :events
   
   resources :comments, only: [:new, :create, :index]
   
