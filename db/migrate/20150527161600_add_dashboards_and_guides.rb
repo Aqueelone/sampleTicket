@@ -8,7 +8,7 @@ class AddDashboardsAndGuides < ActiveRecord::Migration
       t.timestamps null: false          
     end    
     create_table :guides, force: true do |t|
-      t.title :title
+      t.string :title
       t.integer :step
       t.string  :level
       t.belongs_to :next

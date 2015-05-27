@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522182000) do
+ActiveRecord::Schema.define(version: 20150527161600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,39 @@ ActiveRecord::Schema.define(version: 20150522182000) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "dashboard_widgets", id: false, force: true do |t|
+    t.integer "dashboard_id"
+    t.integer "widget_id"
+  end
+
+  add_index "dashboard_widgets", ["dashboard_id"], name: "index_dashboard_widgets_on_dashboard_id", using: :btree
+  add_index "dashboard_widgets", ["widget_id"], name: "index_dashboard_widgets_on_widget_id", using: :btree
+
+  create_table "dashboards", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id",                              array: true
+    t.boolean  "guide_on",   default: true
+    t.integer  "guide_step", default: 1
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "events", force: true do |t|
+    t.json     "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guides", force: true do |t|
+    t.string   "title"
+    t.integer  "step"
+    t.string   "level"
+    t.integer  "next_id"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ticket_statuses", force: true do |t|
@@ -65,11 +98,20 @@ ActiveRecord::Schema.define(version: 20150522182000) do
   create_table "widget_rules", force: true do |t|
     t.integer  "controlled_id"
     t.string   "controlled_type"
+    t.boolean  "allow",           default: true
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
 
   add_index "widget_rules", ["controlled_id", "controlled_type"], name: "index_widget_rules_on_controlled_id_and_controlled_type", using: :btree
+
+  create_table "widget_rules_widgets", id: false, force: true do |t|
+    t.integer "widget_id"
+    t.integer "widget_rule_id"
+  end
+
+  add_index "widget_rules_widgets", ["widget_id"], name: "index_widgets_widget_rules_on_widgets_id", using: :btree
+  add_index "widget_rules_widgets", ["widget_rule_id"], name: "index_widgets_widget_rules_on_widget_rules_id", using: :btree
 
   create_table "widgets", force: true do |t|
     t.string   "name"
@@ -78,19 +120,11 @@ ActiveRecord::Schema.define(version: 20150522182000) do
     t.boolean  "is_admited",   default: false
     t.boolean  "is_moderable", default: false
     t.boolean  "is_template",  default: false
-    t.boolean  "is_readonly",  default: true
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.boolean  "is_readonly",  default: true
   end
 
   add_index "widgets", ["template_id"], name: "index_widgets_on_template_id", using: :btree
-
-  create_table "widgets_widget_rules", id: false, force: true do |t|
-    t.integer "widget_id"
-    t.integer "widget_rule_id"
-  end
-
-  add_index "widgets_widget_rules", ["widget_rule_id"], name: "index_widgets_widget_rules_on_widget_rule_id", using: :btree
-  add_index "widgets_widget_rules", ["widget_id"], name: "index_widgets_widget_rules_on_widget_id", using: :btree
 
 end
