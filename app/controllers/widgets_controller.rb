@@ -74,10 +74,13 @@ class WidgetsController < ApplicationController
 
   # POST /widgets POST /widgets.json
   def create
-    @widget = Widget.new(params[:widget])
+    @widget = Widget.new params[:widget]
+    @widget_rules = WidgetRule.find params[:widget][:widget_rules]
+    @widget.widget_rules = @widget_rules
+    @widget.is_readonly = true
     
     respond_to do |format|
-      if @widget.save_collection_association && @widget.save
+      if @widget.save
         format.html { redirect_to widgets_url, notice: 'Widget was successfully created.' }
         format.json { render json: @widget, status: :created, location: @ticket_status }
       else
@@ -89,8 +92,11 @@ class WidgetsController < ApplicationController
 
   # PUT /widgets/1 PUT /widgets/1.json
   def update
-    @widget = Widget.find(params[:id])
-
+    @widget = Widget.find params[:id]
+    @widget_rules = WidgetRule.find params[:widget][:widget_rules]
+    @widget.widget_rules = @widget_rules
+    @widget.is_readonly = true
+    
     respond_to do |format|
       if @widget.update_attributes(params[:widget])
         format.html { redirect_to widgets_url, notice: 'widget was successfully updated.' }

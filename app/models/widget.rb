@@ -7,7 +7,7 @@ class Widget < ActiveRecord::Base
   belongs_to :template, class_name: "Widget"
   belongs_to :user
   
-  attr_accessible :name, :is_admited, :is_moderable, :is_template, :is_readonly
+  attr_accessible :name, :user_id, :template_id, :is_admited, :is_moderable, :is_template, :is_readonly
   validates :name, presence: true
   
   def is_associated?

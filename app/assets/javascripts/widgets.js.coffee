@@ -13,4 +13,14 @@ $("#widget_is_readonly").on('click', ->
         if $(this).prop('checked') then $("#widget_widget_rules").prop("disabled", "disabled")
         else $("#widget_widget_rules").prop("disabled", "");
     );
+
+$("form.new_widget").on('submit', ->
+        $("#widget_widget_rules").prop("disabled", "");
+    );    
+$("form.edit_widget").on('submit', ->
+        $("#widget_widget_rules").prop("disabled", "");
+    );
+$("#template_display_chooser").on('click', ->
+        $(".template_field").toggleClass("template_off");
+    );
  

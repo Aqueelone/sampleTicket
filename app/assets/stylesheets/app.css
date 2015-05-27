@@ -112,7 +112,8 @@ table thead tr{
     border-bottom-width: 2px;  
     border-left-width: 2px;   
     border-right-width: 3px;
-    box-shadow: 1px 1px 3px #333;
+    box-shadow: 1px 1px 3px #333;    
+    vertical-align: top;
 }
 table thead tr > th{
     color: white;
@@ -120,11 +121,22 @@ table thead tr > th{
     text-transform: lowercase;
     font-size: 1em;;
 }
+table thead tr > th div.inline input{
+    margin: 0px -5px 0px 0px;
+}
+table thead tr > th div.inline{
+    height: 1em;    
+    padding-left: 20px;
+}
 table tbody tr{
     border: #09f solid 1px;
     border-left-width: 2px;  
     border-right-width: 3px;
 }
+table tbody tr.template_off{
+    display: none;
+}
+
 
 .content{
     min-height: 600px;
